@@ -1,0 +1,16 @@
+---
+
+- name: My first playbook
+  hosts: ubuntu
+  become: true
+
+  tasks:
+    - name: Make sure SSH is running
+      service:
+        name: ssh
+        state: started
+
+    - name: Create application directory
+      file:
+        path: /opt/myapp
+        state: directory
