@@ -26,6 +26,16 @@
          APP_ENV=development
        dest: "{{ app_directory }}/app.env"
       notify: Application configuration changed
+    
+    - name: Check application directory
+      stat: 
+        path: "{{ app_directory }}"
+      register: app_dir
+
+    - name: Show directory status
+      debug: 
+        msg: "Application directory exists"
+      when: app_dir.stat.exists
 
   handlers:
     - name: Application configuration changed
