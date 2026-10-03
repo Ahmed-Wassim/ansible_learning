@@ -12,5 +12,22 @@
 
     - name: Create application directory
       file:
-        path: "{{ app_directory }}"
+        path: "{{ item }}"
         state: directory
+      loop:
+        - "{{ app_directory }}/logs"
+        - "{{ app_directory }}/uploads"
+        - "{{ app_directory }}/cache"
+        
+    - name: Create application configuration
+      copy: 
+       content: |
+         APP_NAME=myapp
+         APP_ENV=development
+       dest: "{{ app_directory }}/app.env"
+      notify: Application configuration changed
+
+  handlers:
+    - name: Application configuration changed
+      debug:
+        msg: "Application configuration changed!"
