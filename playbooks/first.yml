@@ -19,14 +19,12 @@
         - "{{ app_directory }}/uploads"
         - "{{ app_directory }}/cache"
         
-    - name: Create application configuration
-      copy: 
-       content: |
-         APP_NAME=myapp
-         APP_ENV=development
-       dest: "{{ app_directory }}/app.env"
+    - name: create application configuration
+      template:
+        src: templates/app.env.j2
+        dest: "{{ app_directory }}/app.env"
       notify: Application configuration changed
-    
+
     - name: Check application directory
       stat: 
         path: "{{ app_directory }}"

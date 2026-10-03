@@ -1,1 +1,5 @@
 app_directory: /opt/ansible-app
+
+app_name: myapp
+app_env: development
+app_port: 8808
