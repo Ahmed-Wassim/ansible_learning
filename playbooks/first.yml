@@ -12,5 +12,5 @@
 
     - name: Create application directory
       file:
-        path: /opt/myapp
+        path: "{{ app_directory }}"
         state: directory
